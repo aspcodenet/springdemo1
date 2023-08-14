@@ -28,11 +28,31 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-test</artifactId>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
+
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>jakarta.xml.ws</groupId>
+			<artifactId>jakarta.xml.ws-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.glassfish.jaxb</groupId>-->
+<!--			<artifactId>jaxb-runtime</artifactId>-->
+<!--		</dependency>-->
+
+
+
+
 	</dependencies>
 
 	<build>
@@ -41,6 +61,42 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+
+
+			<plugin>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<version>3.0.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>wsimport</goal>
+						</goals>
+					</execution>
+
+				</executions>
+				<configuration>
+					<packageName>se.systementor.springdemo1.ws.client</packageName>
+					<sourceDestDir>${project.basedir}/src/main/java</sourceDestDir>
+					<wsdlUrls>
+						<wsdlUrl>https://www.dataaccess.com/webservicesserver/NumberConversion.wso?WSDL</wsdlUrl>
+					</wsdlUrls>
+					<extension>true</extension>
+				</configuration>
+
+				<dependencies>
+					<dependency>
+						<groupId>com.sun.xml.ws</groupId>
+						<artifactId>jaxws-tools</artifactId>
+						<version>3.0.2</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+
+
+
 		</plugins>
 	</build>
 

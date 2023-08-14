@@ -5,7 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import se.systementor.springdemo1.ws.client.NumberConversion;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -27,6 +29,11 @@ public class Springdemo1Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+		var service = new NumberConversion();
+		var soapType =  service.getNumberConversionSoap12();
+		var result = soapType.numberToDollars(BigDecimal.valueOf(122));
+		System.out.println(result);
 		var scan = new Scanner(System.in);
 
 		while(true){
